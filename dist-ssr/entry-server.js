@@ -436,7 +436,7 @@ function QuoteForm() {
     };
     setStatus("sending");
     try {
-      const { getSupabase } = await import("./assets/supabaseClient-DCNPIa4c.js");
+      const { getSupabase } = await import("./assets/supabaseClient-DiLbSfTO.js");
       const supabase = getSupabase();
       if (!supabase) throw new Error("not configured");
       const { error } = await supabase.from("quote_requests").insert(payload);
