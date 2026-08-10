@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components.jsx';
-import { Home, Services, IndustryPage, ServiceAreas, TownPage, About, Contact, NotFound } from './pages.jsx';
+import { Home, Services, IndustryPage, ServiceAreas, TownPage, ResourcesHub, SpokePage, About, Contact, NotFound } from './pages.jsx';
 import { routeMeta } from './data.js';
 
 function MetaSync() {
@@ -28,6 +28,8 @@ export default function App() {
           <Route path="/industries/:slug" element={<IndustryPage />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/service-areas/:slug" element={<TownPage />} />
+          <Route path="/resources" element={<ResourcesHub />} />
+          <Route path="/resources/:slug" element={<SpokePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

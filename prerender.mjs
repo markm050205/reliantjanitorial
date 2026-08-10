@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { render } from './dist-ssr/entry-server.js';
 import {
-  ROUTES, BIZ, TOWNS, INDUSTRIES, SERVICE_TYPES, FAQS, TOWN_PAGES, SOCIAL_PROFILES,
+  ROUTES, BIZ, TOWNS, INDUSTRIES, SERVICE_TYPES, FAQS, TOWN_PAGES, SOCIAL_PROFILES, SPOKES,
 } from './src/data.js';
 
 const DIST = path.resolve('./dist');
@@ -54,6 +54,21 @@ function extraLdFor(routePath) {
       description: town.metaDesc,
     };
   }
+  // Resource guides: Article schema with honest dates
+  const spoke = SPOKES.find((s) => routePath === `/resources/${s.slug}`);
+  if (spoke) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: spoke.h1,
+      description: spoke.metaDesc,
+      datePublished: '2026-08-10',
+      dateModified: '2026-08-10',
+      author: { '@type': 'Organization', name: BIZ.name, url: BIZ.url },
+      publisher: { '@id': BIZ_ID },
+      mainEntityOfPage: `${BIZ.url}${routePath}/`,
+    };
+  }
   // Homepage: FAQPage matching the visible FAQ section
   if (routePath === '/') {
     return {
@@ -100,7 +115,7 @@ function writePage(route, html, head) {
 }
 
 for (const route of ROUTES) {
-  const canonical = `${BIZ.url}${route.path === '/' ? '/' : route.path}`;
+  const canonical = `${BIZ.url}${route.path === '/' ? '/' : route.path + '/'}`;
   const html = render(route.path);
   writePage(route.path, html, headBlock({ ...route, canonical, extraLd: extraLdFor(route.path) }));
   console.log(`prerendered ${route.path}`);
@@ -128,7 +143,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${ROUTES.map(
   (r) => `  <url>
-    <loc>${BIZ.url}${r.path === '/' ? '/' : r.path}</loc>
+    <loc>${BIZ.url}${r.path === '/' ? '/' : r.path + '/'}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${r.path === '/' ? 'weekly' : 'monthly'}</changefreq>
     <priority>${r.path === '/' ? '1.0' : '0.8'}</priority>

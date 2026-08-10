@@ -1,3 +1,6 @@
+import { SPOKES } from './spokes.js';
+export { SPOKES };
+
 // ---------------------------------------------------------------
 // EDIT ME: business contact details used across the whole site
 // ---------------------------------------------------------------
@@ -327,6 +330,16 @@ export const ROUTES = [
     path: `/service-areas/${t.slug}`,
     title: t.title,
     metaDesc: t.metaDesc,
+  })),
+  {
+    path: '/resources',
+    title: 'Commercial Cleaning Resources & Guides | Reliant Janitorial',
+    metaDesc: 'Plain English guides for NJ facility managers: what commercial cleaning costs, how to switch companies without a gap, the full office cleaning checklist, and more.',
+  },
+  ...SPOKES.map((s) => ({
+    path: `/resources/${s.slug}`,
+    title: s.title,
+    metaDesc: s.metaDesc,
   })),
   {
     path: '/about',
