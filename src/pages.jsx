@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BIZ, SERVICES, CHECKLIST, INDUSTRIES, TOWNS, FAQS, TOWN_PAGES, LAST_UPDATED, SPOKES } from './data.js';
+import { BIZ, SERVICES, CHECKLIST, INDUSTRIES, TOWNS, FAQS, TOWN_PAGES, LAST_UPDATED } from './data.js';
 import { CtaBand, QuoteForm } from './components.jsx';
 
 function IndustryGrid() {
@@ -417,78 +417,6 @@ export function TownPage() {
             {TOWN_PAGES.filter((x) => x.slug !== t.slug).map((x) => (
               <Link key={x.slug} to={`/service-areas/${x.slug}`} style={{ textDecoration: 'none' }}>
                 <span>{x.town}, NJ</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <CtaBand />
-    </>
-  );
-}
-
-export function ResourcesHub() {
-  return (
-    <>
-      <section className="band">
-        <div className="wrap">
-          <p className="eyebrow">Resources</p>
-          <h1>Commercial cleaning guides for facility managers</h1>
-          <p className="lead" style={{ marginTop: 14 }}>
-            Plain English answers to the questions we get on every walkthrough:
-            what it costs, how to switch, and what a proper scope includes.
-          </p>
-          <div className="grid-2">
-            {SPOKES.map((s) => (
-              <Link key={s.slug} to={`/resources/${s.slug}`} className="card">
-                <h3>{s.short}</h3>
-                <p>{s.sections[0].paras[0].split('.')[0]}.</p>
-                <div className="go">Read the guide →</div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <CtaBand />
-    </>
-  );
-}
-
-export function SpokePage() {
-  const { slug } = useParams();
-  const s = SPOKES.find((x) => x.slug === slug) || SPOKES[0];
-  return (
-    <>
-      <section className="band">
-        <div className="wrap">
-          <p className="eyebrow">Guide</p>
-          <h1>{s.h1}</h1>
-          <LastUpdated />
-          <div className="prose" style={{ marginTop: 10 }}>
-            {s.sections.map((sec) => (
-              <div key={sec.h2}>
-                <h2>{sec.h2}</h2>
-                {(sec.paras || []).map((par, i) => <p key={i}>{par}</p>)}
-                {sec.list && (
-                  <ul className="ticks" style={{ margin: '10px 0 22px' }}>
-                    {sec.list.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                )}
-              </div>
-            ))}
-            <Link className="btn btn-amber" to="/contact">Get a Free Quote</Link>
-          </div>
-        </div>
-      </section>
-      <section className="band alt">
-        <div className="wrap">
-          <p className="eyebrow">More guides</p>
-          <h2>Keep reading</h2>
-          <div className="grid-3">
-            {SPOKES.filter((x) => x.slug !== s.slug).slice(0, 3).map((x) => (
-              <Link key={x.slug} to={`/resources/${x.slug}`} className="card">
-                <h3>{x.short}</h3>
-                <div className="go">Read the guide →</div>
               </Link>
             ))}
           </div>

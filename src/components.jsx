@@ -25,7 +25,6 @@ export function Header() {
             <NavLink to="/services">Services</NavLink>
             <NavLink to="/industries/dental-medical-office-cleaning">Industries</NavLink>
             <NavLink to="/service-areas">Service Areas</NavLink>
-            <NavLink to="/resources">Resources</NavLink>
             <NavLink to="/about">About</NavLink>
             {BIZ.phone && <a className="call-inline" href={BIZ.phoneHref}>{BIZ.phone}</a>}
             <Link to="/contact" className="btn btn-amber">Get a Free Quote</Link>
@@ -80,7 +79,6 @@ export function Footer() {
             <h3>Company</h3>
             <Link to="/services">Services</Link>
             <Link to="/service-areas">Service Areas</Link>
-            <Link to="/resources">Resources</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Get a Quote</Link>
           </div>
